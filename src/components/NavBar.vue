@@ -1,7 +1,8 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { RouterLink } from 'vue-router';
-
+import quiz_data from '../data/quizes_data.json'
+const quizzes = ref(quiz_data)
 const search = ref('')
 
 watch(search, () => {
