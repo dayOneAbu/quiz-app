@@ -1,13 +1,13 @@
 <script setup>
-import { ref, watch } from 'vue'
 import { RouterLink } from 'vue-router';
-import quiz_data from '../data/quizes_data.json'
-const quizzes = ref(quiz_data)
-const search = ref('')
+import { defineEmits } from 'vue'
+const emit = defineEmits(['searchKeyword'])
 
-watch(search, () => {
-    quizzes.value = quiz_data.filter(quiz => quiz.name.toLowerCase().includes(search.value.toLowerCase()))
-})
+const emitSearchKeyword = (keyword) => {
+    emit("searchKeyword", keyword)
+}
+
+
 </script>
 <template>
     <header class="container">
@@ -17,7 +17,7 @@ watch(search, () => {
         </div>
         <div>
             <h1>Quizes</h1>
-            <input v-model.trim='search' type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." @input="event => emitSearchKeyword(event.target.value)" />
         </div>
     </header>
 
